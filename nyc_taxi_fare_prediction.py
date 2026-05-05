@@ -1,16 +1,9 @@
 # =============================================================================
-# NYC Taxi Fare Prediction — Supervised Learning Assignment
-# Dataset: NYC Yellow Taxi Trip Record Data (2025)
-# Task: Regression | Target: fare_amount
-# RQ1–RQ7 aligned with IEEE handout
+# IMPORTS & SETUP
 # =============================================================================
-# Run on Google Colab: Upload this file, then Runtime > Run All
-# !pip install pyarrow xgboost -q  # Uncomment if needed
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib
 import seaborn as sns
 import warnings, os
 warnings.filterwarnings('ignore')
@@ -30,8 +23,8 @@ sns.set_theme(style='darkgrid')
 plt.rcParams.update({'figure.figsize': (12, 6), 'axes.titlesize': 14,
                      'axes.titleweight': 'bold', 'figure.dpi': 120})
 os.makedirs('outputs', exist_ok=True)
-
 COLORS = ['#4C72B0', '#DD8452', '#55A868', '#C44E52', '#8172B2']
+print('Libraries loaded successfully.')
 
 # =============================================================================
 # DATA LOADING & PREPROCESSING
@@ -250,9 +243,10 @@ print("\n" + "="*60)
 print("RQ4: Feature Importance & Interpretability")
 
 rf_model = fitted_models['Random Forest'][0]
-importances = pd.DataFrame({'Feature': X_train.columns,
-                             'Importance': rf_model.feature_importances_})\
-                .sort_values('Importance', ascending=False).reset_index(drop=True)
+importances = (pd.DataFrame({'Feature': X_train.columns,
+                              'Importance': rf_model.feature_importances_})
+               .sort_values('Importance', ascending=False)
+               .reset_index(drop=True))
 importances['Rank'] = importances.index + 1
 importances['Direction'] = 'Positive'  # simplified; all tree importances are unsigned
 
