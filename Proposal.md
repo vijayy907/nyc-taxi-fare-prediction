@@ -1,54 +1,124 @@
-# Supervised Learning Assignment Proposal
+# Supervised Learning Assignment — Project Proposal
 
-**Project Title**: NYC Taxi Fare Prediction: A Supervised Learning Approach
+**Project Title**: NYC Taxi Fare Prediction: A Supervised Regression Learning Approach
 
-## Dataset Overview
-- **Dataset Name**: NYC Taxi Trip Record Data (2025 Updated)
-- **Source Link**: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
-- **Number of Rows**: > 10,000 (Millions available, subset used for computation)
-- **Number of Columns**: 18-20 features
-- **Target Variable**: `fare_amount`
-- **Type of Task**: Regression
+---
 
-## Problem Statement
-The objective of this project is to build a machine learning model to accurately predict the fare amount of a taxi ride in New York City based on trip characteristics such as trip distance, pickup/dropoff locations, time of day, and passenger count. Accurate fare prediction is vital for both drivers and passengers to ensure transparency and efficiency in the transportation ecosystem.
+## 1. Dataset Information
 
-## Research Questions
-1. How does the trip distance linearly and non-linearly affect the total fare amount?
-2. Are there specific times of the day or days of the week that result in higher average fares due to traffic or surcharges?
-3. How do pickup and drop-off locations (zones) impact the final fare?
-4. What is the impact of passenger count on the fare amount, if any?
-5. Which machine learning algorithm provides the best balance between predictive accuracy and computational efficiency for this dataset?
-6. Can feature engineering (such as extracting hour, day, and month from pickup datetime) significantly improve model performance?
+| Property | Details |
+|---|---|
+| **Dataset Name** | NYC Yellow Taxi Trip Record Data (2025 Updated) |
+| **Source Link** | https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page |
+| **Direct Download** | https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2025-01.parquet |
+| **Number of Rows** | > 3,000,000 (subset of ~500,000 used) |
+| **Number of Columns** | 19 (18 input features + 1 target) |
+| **Format** | Parquet / CSV |
+| **Updated** | 2025 ✅ |
 
-## Proposed Methodology
-1. **Data Collection**: Download the structured Parquet/CSV format data from the NYC TLC website.
-2. **Data Preprocessing**:
-   - Handle missing values (imputation or removal).
-   - Filter out outliers (e.g., negative fares, zero distances, or unrealistic geographic coordinates).
-   - Convert datetime columns into usable numerical features (hour, day of week).
-3. **Exploratory Data Analysis (EDA)**: Use visualizations to understand the distribution of fares and correlations between features.
-4. **Feature Engineering**: Standardize numerical features and encode categorical ones.
-5. **Model Training**: Split data into 80% training and 20% testing sets. Train multiple regression models.
-6. **Model Evaluation**: Compare models using standard regression metrics.
+---
 
-## Machine Learning Models to be Used
-- **Linear Regression**: As a baseline model to establish simple linear relationships.
-- **Random Forest Regressor**: To capture non-linear relationships and interactions among features.
-- **Gradient Boosting Regressor (e.g., XGBoost / LightGBM)**: For state-of-the-art predictive performance on tabular data.
+## 2. Target Variable
 
-## Evaluation Metrics
-The performance of the regression models will be evaluated using:
-- **Root Mean Squared Error (RMSE)**: To penalize large errors in fare prediction.
-- **Mean Absolute Error (MAE)**: To understand the average absolute dollar error of predictions.
-- **R-squared ($R^2$) Score**: To determine the proportion of variance in the fare amount explained by the model.
+**`fare_amount`** — the base fare in USD charged for a taxi trip in New York City.
 
-## Expected Figures and Tables
-- **Figures**:
-  - Histogram of the target variable (`fare_amount`).
-  - Scatter plot of `trip_distance` vs. `fare_amount`.
-  - Feature Importance bar chart (from Random Forest/Gradient Boosting).
-  - Actual vs. Predicted fare amount scatter plot to visualize model performance.
-- **Tables**:
-  - Summary statistics table of the cleaned dataset.
-  - Model comparison table detailing RMSE, MAE, and $R^2$ scores across the chosen algorithms.
+---
+
+## 3. Type of Task
+
+**Regression** — The goal is to predict a continuous numeric value (fare amount in dollars).
+
+---
+
+## 4. Problem Statement
+
+The NYC taxi industry processes millions of trips per month, yet fare pricing remains opaque to passengers. Accurate fare prediction enables passengers to budget their travel costs, allows drivers to optimize route planning, and helps regulators detect billing anomalies. This project applies supervised machine learning regression models to the NYC Taxi Trip Record Data (2025) to predict taxi fare amounts based on trip characteristics such as distance, duration, time of day, pickup/dropoff locations, and surcharge features. We systematically compare multiple models, evaluate the impact of preprocessing, identify the most influential features, and assess robustness under varying experimental conditions.
+
+---
+
+## 5. Research Questions
+
+### RQ1 — Baseline Performance
+How effectively can baseline supervised learning models predict NYC taxi fares on the 2025 trip dataset?
+
+### RQ2 — Model Comparison
+Which supervised learning model achieves the best predictive performance for taxi fare prediction, and how do the models compare across regression metrics?
+
+### RQ3 — Effect of Preprocessing
+How do different data preprocessing strategies (raw data, imputation, scaling, full pipeline) affect model performance?
+
+### RQ4 — Feature Importance and Interpretability
+Which input features contribute most to fare prediction, and what domain insights can be drawn from the most influential variables?
+
+### RQ5 — Sensitivity to Evaluation Metrics
+How does the relative ranking of candidate models change when RMSE, MAE, and R² are considered separately?
+
+### RQ6 — Robustness and Generalization
+How robust is the best-performing model under different train-test splits, k-fold cross-validation, and data perturbation (noise and missing values)?
+
+### RQ7 — Practical Usefulness and Final Recommendation
+To what extent is the developed supervised learning solution practically useful, interpretable, and reliable for real-world taxi fare estimation?
+
+---
+
+## 6. Proposed Methodology
+
+1. **Data Collection**: Load January 2025 Yellow Taxi Parquet data directly from the NYC TLC S3 endpoint.
+2. **Preprocessing Pipeline**:
+   - Remove invalid records (negative fares, zero distance, extreme outliers)
+   - Handle missing values via median imputation
+   - Extract datetime features: pickup hour, day of week, trip duration
+   - Standardize numerical features using StandardScaler
+   - Encode categorical features
+3. **Exploratory Data Analysis**: Fare distributions, correlation heatmaps, fare vs. distance scatter plots, hourly patterns.
+4. **Model Training**: 80/20 train-test split. Five regression models trained:
+   - Linear Regression
+   - Decision Tree Regressor
+   - k-Nearest Neighbours Regressor
+   - Random Forest Regressor
+   - Gradient Boosting Regressor
+5. **Evaluation**: RMSE, MAE, R² across all models.
+6. **Advanced Analysis**: Preprocessing ablation, feature importance, cross-validation, robustness under noise and missingness, final decision matrix.
+
+---
+
+## 7. Machine Learning Models
+
+| Model | Type |
+|---|---|
+| Linear Regression | Baseline linear |
+| Decision Tree Regressor | Non-linear, interpretable |
+| k-NN Regressor | Instance-based |
+| Random Forest Regressor | Ensemble (bagging) |
+| Gradient Boosting Regressor | Ensemble (boosting) |
+
+---
+
+## 8. Evaluation Metrics
+
+| Metric | Description |
+|---|---|
+| **RMSE** | Root Mean Squared Error — penalises large prediction errors |
+| **MAE** | Mean Absolute Error — average dollar error per prediction |
+| **R²** | Coefficient of Determination — proportion of variance explained |
+
+---
+
+## 9. Expected Figures and Tables
+
+| # | Figure / Table | RQ |
+|---|---|---|
+| Table I | Baseline model performance (RMSE, MAE, R²) | RQ1 |
+| Figure 1 | Grouped bar chart of baseline model metrics | RQ1 |
+| Table II | Comparative performance of all candidate models | RQ2 |
+| Figure 2 | Horizontal bar or radar chart of model rankings | RQ2 |
+| Table III | Impact of preprocessing strategies on best model | RQ3 |
+| Figure 3 | Ablation bar chart of preprocessing strategies | RQ3 |
+| Table IV | Top-10 feature importances with direction & interpretation | RQ4 |
+| Figure 4 | Feature importance bar plot (Random Forest / SHAP) | RQ4 |
+| Table V | Model rankings under RMSE, MAE, and R² | RQ5 |
+| Figure 5 | Slope / bump chart of metric-based rankings | RQ5 |
+| Table VI | Robustness under standard split, CV, noise, missingness | RQ6 |
+| Figure 6 | Boxplot or line chart of cross-validation performance | RQ6 |
+| Table VII | Final decision matrix (performance, interpretability, cost) | RQ7 |
+| Figure 7 | Radar chart of final model trade-off analysis | RQ7 |
