@@ -44,25 +44,35 @@ df['pickup_month']          = df['tpep_pickup_datetime'].dt.month
 df['trip_duration_minutes'] = (df['tpep_dropoff_datetime'] -
                                 df['tpep_pickup_datetime']).dt.total_seconds() / 60
 
-FEATURES = ['VendorID','passenger_count','trip_distance','RatecodeID',
-            'PULocationID','DOLocationID','payment_type','extra','mta_tax',
-            'tip_amount','tolls_amount','improvement_surcharge',
-            'congestion_surcharge','airport_fee','pickup_hour',
-            'pickup_day_of_week','pickup_month','trip_duration_minutes',
-            'fare_amount']
+# --- Select and Clean Features Dynamically ---
+# (Handles variations in column names like 'airport_fee' vs 'Airport_fee')
+POTENTIAL_FEATURES = [
+    'VendorID', 'passenger_count', 'trip_distance', 'RatecodeID',
+    'PULocationID', 'DOLocationID', 'payment_type', 'extra', 'mta_tax',
+    'tip_amount', 'tolls_amount', 'improvement_surcharge',
+    'congestion_surcharge', 'airport_fee', 'Airport_fee', 'cbd_congestion_fee',
+    'pickup_hour', 'pickup_day_of_week', 'pickup_month', 'trip_duration_minutes',
+    'fare_amount'
+]
 
+# Only select features that actually exist in the dataset
+FEATURES = [f for f in POTENTIAL_FEATURES if f in df.columns]
 df = df[FEATURES].copy()
 
 # --- Cleaning ---
 n_raw = len(df)
 df = df[(df['fare_amount'] > 2.5)  & (df['fare_amount'] < 300) &
         (df['trip_distance'] > 0)   & (df['trip_distance'] < 100) &
-        (df['trip_duration_minutes'] > 0) & (df['trip_duration_minutes'] < 180) &
-        (df['passenger_count'] > 0) & (df['passenger_count'] <= 6)]
+        (df['trip_duration_minutes'] > 0) & (df['trip_duration_minutes'] < 180)]
+
+# Add passenger count check only if column exists
+if 'passenger_count' in df.columns:
+    df = df[(df['passenger_count'] > 0) & (df['passenger_count'] <= 6)]
+
 df.fillna(df.median(numeric_only=True), inplace=True)
 
 # Use a reproducible sample for speed
-df = df.sample(n=100_000, random_state=42).reset_index(drop=True)
+df = df.sample(n=100_000, random_state=42, replace=False).reset_index(drop=True)
 
 X = df.drop('fare_amount', axis=1)
 y = df['fare_amount']
