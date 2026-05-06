@@ -1,7 +1,7 @@
-# NYC Taxi Fare Prediction — Supervised Learning Assignment
+﻿# NYC Taxi Fare Prediction â€” Supervised Learning Assignment
 
 **Programme**: MSc Data Science  
-**Student**: Karnati Mysanthosh (36733714)  
+**Student**: Mule Sai Vijay (36733714)  
 **University**: University of Europe for Applied Sciences  
 **Supervisor**: Prof. Raja Hashim Ali
 
@@ -11,7 +11,7 @@ This project leverages supervised machine learning to predict taxi fares in New 
 ## Research Questions
 The project is structured around 7 core research questions:
 - **RQ1**: Baseline regression performance (LR, DT, k-NN).
-- **RQ2**: Model comparison across RMSE, MAE, and R².
+- **RQ2**: Model comparison across RMSE, MAE, and RÂ².
 - **RQ3**: Impact of data preprocessing and outlier removal.
 - **RQ4**: Feature importance and domain insights.
 - **RQ5**: Model ranking sensitivity across different metrics.
@@ -31,3 +31,4 @@ To install dependencies, run:
 ```bash
 pip install -r requirements.txt
 ```
+
