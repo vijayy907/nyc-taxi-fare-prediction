@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 40px auto; padding: 20px; background-color: #f8f9fa; }
+    .container { background: white; padding: 50px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    h1 { color: #d32f2f; text-align: center; border-bottom: 3px solid #d32f2f; padding-bottom: 15px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+    h2 { color: #1a237e; border-left: 6px solid #d32f2f; padding-left: 15px; margin-top: 40px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    h3 { color: #303f9f; margin-top: 25px; }
+    table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 0.95em; }
+    th, td { border: 1px solid #e0e0e0; padding: 12px; text-align: left; }
+    th { background-color: #f5f5f5; font-weight: bold; color: #1a237e; }
+    tr:nth-child(even) { background-color: #fafafa; }
+    .header-info { text-align: center; margin-bottom: 50px; padding: 20px; background: #f1f1f1; border-radius: 5px; }
+    .header-info p { margin: 5px 0; font-weight: bold; color: #555; }
+    .footer { text-align: center; font-size: 0.8em; color: #999; margin-top: 60px; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Supervised Machine Learning Proposal</h1>
+    <div class="header-info">
+        <p>Programme: MSc Data Science</p>
+        <p>Student: Karnati Mysanthosh (ID: 36733714)</p>
+        <p>University of Europe for Applied Sciences</p>
+        <p>Supervisor: Prof. Raja Hashim Ali</p>
+        <p>Date: 4th May 2026</p>
+    </div># Supervised Machine Learning Assignment
+# Submission 1 â€“ Research Proposal
+
+<strong>Programme</strong>: MSc Data Science  
+<strong>Student</strong>: Karnati Mysanthosh  
+<strong>Student ID</strong>: 36733714  
+<strong>University</strong>: University of Europe for Applied Sciences  
+<strong>Supervisor</strong>: Prof. Raja Hashim Ali  
+<strong>Date</strong>: 4th May 2026
+
+<hr>
+
+## 1. Project Title
+<strong>Lap-Level Pit-Stop Prediction in Formula 1 Racing Using Supervised Machine Learning</strong>
+
+<hr>
+
+## 2. Dataset Information
+
+</td><td> Property </td><td> Value </td><td>
+</td><td><hr></td><td><hr></td><td>
+</td><td> <strong>Dataset Title</strong> </td><td> F1 Strategy Dataset (Lap-Level Race Data) </td><td>
+</td><td> <strong>Domain</strong> </td><td> Sports Analytics / Data Science (Motorsports) </td><td>
+</td><td> <strong>Source</strong> </td><td> [Kaggle: F1 Strategy Dataset](https://www.kaggle.com/datasets/aadigupta1601/f1-strategy-dataset-pit-stop-prediction) </td><td>
+</td><td> <strong>Rows & Columns</strong> </td><td> 101,371 rows Ã— 17 columns </td><td>
+</td><td> <strong>Data Period</strong> </td><td> 2019 â€“ 2025 Formula 1 seasons </td><td>
+</td><td> <strong>Task Type</strong> </td><td> Binary Classification (Pit-Stop Prediction) </td><td>
+</td><td> <strong>Target Variable</strong> </td><td> `pit_stop` (0 = No pit stop, 1 = Pit stop) </td><td>
+</td><td> <strong>Class Balance</strong> </td><td> ~82.3% No Pit, ~17.7% Pit Stop (Imbalanced) </td><td>
+
+<hr>
+
+## 3. Problem Statement
+The timing of Formula 1 pit stops is one of the most critical tactical moves in motorsports. A well-timed pit stop can win a race, while a poor decision can result in a significant loss of positions. Pit stop timing is influenced by complex, multi-dimensional factors including tyre degradation, safety car interventions, weather changes, and fuel loads. Currently, many of these decisions are made manually by race engineers under high-pressure environments. This project proposes a supervised learning approach to predict the likelihood of a pit stop occurring in any given lap. By analyzing historical race data from the 2019â€“2025 seasons, we aim to build a predictive model that assists in optimizing race strategy through data-driven insights.
+
+<hr>
+
+## 4. Research Questions
+*   <strong>RQ1.</strong> How effectively can baseline supervised learning models (Logistic Regression, Decision Tree, k-NN) predict pit stops on the F1 Strategy Dataset?
+*   <strong>RQ2.</strong> Which supervised learning model achieves the best predictive performance for pit-stop classification, and how do models compare across all metrics?
+*   <strong>RQ3.</strong> How do different data preprocessing strategies (raw data, imputation, scaling/encoding, full pipeline) affect model performance?
+*   <strong>RQ4.</strong> Which input features contribute most to pit-stop prediction, and what domain insights can be derived from the top-ranked features?
+*   <strong>RQ5.</strong> How does the relative ranking of candidate models change when evaluated across different metrics (Accuracy, Precision, Recall, F1-score, AUC)?
+*   <strong>RQ6.</strong> How robust is the best-performing model under 5-fold cross-validation and varying data conditions?
+*   <strong>RQ7.</strong> To what extent is the developed supervised learning solution practically useful and reliable for real-world F1 race-strategy decision-making?
+
+<hr>
+
+## 5. Proposed Methodology
+
+### 5.1 Data Preprocessing
+*   <strong>Cleaning</strong>: Handling missing values through median/mode imputation.
+*   <strong>Balancing</strong>: Addressing class imbalance using stratified splitting and evaluating through Precision-Recall curves.
+*   <strong>Feature Engineering</strong>: Encoding categorical variables (e.g., `tyre_compound`) and scaling numerical features (e.g., `tyre_life`, `fuel_load`).
+*   <strong>Splitting</strong>: 80% training / 20% testing set split.
+
+### 5.2 Machine Learning Models
+*   <strong>Logistic Regression</strong>: Linear baseline with L2 regularization.
+*   <strong>Decision Tree</strong>: Interpretable non-linear baseline.
+*   <strong>k-Nearest Neighbors (k-NN)</strong>: Instance-based classification.
+*   <strong>Random Forest</strong>: Ensemble bagging method for high variance reduction.
+*   <strong>XGBoost</strong>: Advanced gradient boosting for state-of-the-art accuracy.
+
+### 5.3 Evaluation Metrics
+*   <strong>Primary</strong>: F1-Score and AUC-ROC (due to class imbalance).
+*   <strong>Secondary</strong>: Accuracy, Precision, Recall.
+*   <strong>Analysis</strong>: Confusion Matrix and Gain-based Feature Importance.
+
+<hr>
+
+## 6. Expected Figures and Tables
+
+</td><td> # </td><td> Figure / Table </td><td> Purpose </td><td>
+</td><td><hr></td><td><hr></td><td><hr></td><td>
+</td><td> <strong>Table I</strong> </td><td> Baseline Model Performance </td><td> Comparison of LR, DT, and k-NN </td><td>
+</td><td> <strong>Figure 1</strong> </td><td> Baseline Performance Chart </td><td> Grouped bar chart of Accuracy, Precision, Recall, F1 </td><td>
+</td><td> <strong>Table II</strong> </td><td> Full Model Comparison </td><td> Results for all 5 candidate models </td><td>
+</td><td> <strong>Figure 2</strong> </td><td> Model Ranking Chart </td><td> Sorted bar chart by F1-score and AUC-ROC </td><td>
+</td><td> <strong>Table III</strong> </td><td> Preprocessing Impact </td><td> Ablation study (Raw vs. Pipeline) </td><td>
+</td><td> <strong>Figure 3</strong> </td><td> Preprocessing Gains </td><td> Line plot showing performance increase </td><td>
+</td><td> <strong>Table IV</strong> </td><td> Top-10 Feature Importances </td><td> Ranking of predictors (Gain-based) </td><td>
+</td><td> <strong>Figure 4</strong> </td><td> Feature Importance Plot </td><td> Bar plot of the top 10 influencers </td><td>
+</td><td> <strong>Table V</strong> </td><td> Metric Sensitivity Ranking </td><td> Comparison of model ranks across metrics </td><td>
+</td><td> <strong>Figure 5</strong> </td><td> Bump Chart </td><td> Visualization of model rank shifts </td><td>
+</td><td> <strong>Table VI</strong> </td><td> 5-Fold CV Robustness </td><td> Stability analysis of the best model </td><td>
+</td><td> <strong>Figure 6</strong> </td><td> CV Performance Boxplot </td><td> Variance visualization across folds </td><td>
+</td><td> <strong>Table VII</strong> </td><td> Final Decision Matrix </td><td> Criteria-based model selection </td><td>
+</td><td> <strong>Figure 7</strong> </td><td> Multi-criteria Radar Chart </td><td> Trade-off analysis (Performance vs. Speed vs. Interpretability) </td><td>
+</td><td> <strong>Figure 8</strong> </td><td> Confusion Matrix </td><td> Error analysis of the recommended model </td></tr>
+    <div class="footer">
+        <p>F1 Pit-Stop Prediction &copy; 2026 | Supervised Machine Learning Submission 1</p>
+    </div>
+</div>
+</body>
+</html>
