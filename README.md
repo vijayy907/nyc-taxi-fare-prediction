@@ -1,112 +1,35 @@
-# 🚕 NYC Taxi Fare Prediction: A Supervised Learning Approach
+# F1 Pit-Stop Prediction — Supervised Learning Assignment
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![Dataset](https://img.shields.io/badge/Dataset-NYC%20TLC%202025-orange)
+**Programme**: MSc Data Science  
+**Student**: Karnati Mysanthosh (36733714)  
+**University**: University of Europe for Applied Sciences  
+**Supervisor**: Prof. Raja Hashim Ali
 
-## 📌 Project Overview
+## Project Overview
+This project applies supervised machine learning to predict lap-level pit stops in Formula 1 racing. Using data from the 2019-2025 seasons, we evaluate multiple classifiers to optimize race strategy decisions.
 
-This project applies supervised machine learning regression techniques to predict taxi fare amounts in New York City using the official NYC Taxi & Limousine Commission (TLC) Trip Record Data (2025 Updated).
+## Research Questions
+- **RQ1**: Baseline performance (Logistic Regression, Decision Tree, k-NN).
+- **RQ2**: Comprehensive model comparison (including Random Forest and XGBoost).
+- **RQ3**: Impact of preprocessing strategies on F1-score.
+- **RQ4**: Feature importance and domain interpretation (Tyre life, Safety Car, etc.).
+- **RQ5**: Model sensitivity to evaluation metrics (Accuracy, Precision, Recall, F1, AUC).
+- **RQ6**: Robustness through 5-fold cross-validation.
+- **RQ7**: Practical usefulness and final model recommendation.
 
-**Task Type:** Regression  
-**Target Variable:** `fare_amount`  
-**Best Model:** Gradient Boosting Regressor  
+## Dataset
+The dataset is sourced from Kaggle: [F1 Strategy Dataset (Lap-Level Race Data)](https://www.kaggle.com/datasets/aadigupta1601/f1-strategy-dataset-pit-stop-prediction).
 
----
+## How to Run
+1.  Install dependencies: `pip install -r requirements.txt`
+2.  Run the Jupyter Notebook: `f1_pitstop_prediction.ipynb`
+3.  The script will generate all result tables and figures in the `/outputs/` directory.
 
-## 📂 Repository Structure
-
-```
-.
-├── nyc_taxi_fare_prediction.ipynb   # Main Jupyter Notebook (complete + executed)
-├── Proposal.md                      # Assignment proposal document
-├── requirements.txt                 # Required Python libraries
-└── README.md                        # This file
-```
-
----
-
-## 📊 Dataset
-
-| Property | Details |
-|---|---|
-| **Name** | NYC Yellow Taxi Trip Records (January 2025) |
-| **Source** | [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) |
-| **Direct Download** | [yellow_tripdata_2025-01.parquet](https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2025-01.parquet) |
-| **Rows** | > 3 million |
-| **Columns** | 18–20 |
-| **Format** | Parquet (loaded directly in the notebook) |
-| **Updated** | 2025 ✅ |
-
-The dataset is loaded **directly from the URL** inside the notebook — no manual download is needed.
-
----
-
-## 🤖 Machine Learning Models
-
-| Model | Description |
-|---|---|
-| Linear Regression | Baseline linear model |
-| Random Forest Regressor | Ensemble tree-based model |
-| Gradient Boosting Regressor | Boosted tree-based model (best performer) |
-
----
-
-## 📈 Evaluation Metrics
-
-- **RMSE** – Root Mean Squared Error
-- **MAE** – Mean Absolute Error
-- **R²** – Coefficient of Determination
-
----
-
-## 🚀 How to Run
-
-### Option 1: Google Colab (Recommended — no installation needed)
-
-1. Go to [Google Colab](https://colab.research.google.com/)
-2. Click **File → Upload notebook** and upload `nyc_taxi_fare_prediction.ipynb`
-3. Click **Runtime → Run all**
-4. All dependencies are installed automatically in the first cell
-
-### Option 2: Local Environment
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/<your-username>/nyc-taxi-fare-prediction.git
-   cd nyc-taxi-fare-prediction
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Launch Jupyter:**
-   ```bash
-   jupyter notebook nyc_taxi_fare_prediction.ipynb
-   ```
-
-4. **Run all cells** (Kernel → Restart & Run All)
-
----
-
-## 📦 Requirements
-
-See [`requirements.txt`](requirements.txt) for the full list of dependencies.
-
----
-
-## 📋 Research Questions Addressed
-
-1. How does trip distance affect fare amount?
-2. Are there time-of-day patterns that influence fares?
-3. How do pickup/dropoff locations impact fare?
-4. Does passenger count affect the fare amount?
-5. Which ML model gives the best performance for fare prediction?
-6. Does feature engineering (hour, day, duration) improve model accuracy?
-
----
-
-## 👤 Author
-
-**Student Name** — Supervised Learning Assignment, 2026  
-**Professor**: Prof. Raja Hashim Ali
+## Requirements
+- Python 3.8+
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- scikit-learn
+- xgboost
