@@ -71,8 +71,8 @@ if 'passenger_count' in df.columns:
 
 df.fillna(df.median(numeric_only=True), inplace=True)
 
-# Use a reproducible sample for speed
-df = df.sample(n=100_000, random_state=42, replace=False).reset_index(drop=True)
+# Use a reproducible sample for speed (50k rows ensures stability in Colab)
+df = df.sample(n=50_000, random_state=42, replace=False).reset_index(drop=True)
 
 X = df.drop('fare_amount', axis=1)
 y = df['fare_amount']
@@ -149,8 +149,8 @@ all_models = [
     ('Linear Regression',       LinearRegression(),                                           True),
     ('Decision Tree',           DecisionTreeRegressor(max_depth=8, random_state=42),          False),
     ('k-NN Regressor',          KNeighborsRegressor(n_neighbors=10, n_jobs=-1),               True),
-    ('Random Forest',           RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1), False),
-    ('Gradient Boosting',       GradientBoostingRegressor(n_estimators=150, learning_rate=0.1,
+    ('Random Forest',           RandomForestRegressor(n_estimators=50, random_state=42, n_jobs=-1), False),
+    ('Gradient Boosting',       GradientBoostingRegressor(n_estimators=100, learning_rate=0.1,
                                                           max_depth=5, random_state=42),      False),
 ]
 
@@ -417,9 +417,12 @@ print("\n" + "="*60)
 print("ALL RESULTS SAVED TO /outputs/")
 print("="*60)
 print("\nFinal Model Comparison:")
-print(rq2_df[['Model','RMSE','MAE','R2']].to_string(index=False))
-best = rq2_df.sort_values('RMSE').iloc[0]
-print(f"\n✅ Best Model: {best['Model']} | RMSE: {best['RMSE']} | MAE: {best['MAE']} | R²: {best['R2']}")
+if 'rq2_df' in locals() or 'rq2_df' in globals():
+    print(rq2_df[['Model','RMSE','MAE','R2']].to_string(index=False))
+    best = rq2_df.sort_values('RMSE').iloc[0]
+    print(f"\n✅ Best Model: {best['Model']} | RMSE: {best['RMSE']} | MAE: {best['MAE']} | R²: {best['R2']}")
+else:
+    print("Error: Model comparison data (rq2_df) not found. Please ensure RQ2 has finished running.")
 print("\nOutputs generated:")
 for f in sorted(os.listdir('outputs')):
     print(f"  outputs/{f}")
