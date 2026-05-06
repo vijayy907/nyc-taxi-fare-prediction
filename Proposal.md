@@ -2,7 +2,7 @@
 # Submission 1 – Research Proposal
 
 **Programme**: MSc Data Science  
-**Student**: Karnati Mysanthosh  
+**Student**: Mule Sai Vijay  
 **Student ID**: 36733714  
 **University**: University of Europe for Applied Sciences  
 **Supervisor**: Prof. Raja Hashim Ali  
