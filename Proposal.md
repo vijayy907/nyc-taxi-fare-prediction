@@ -11,7 +11,7 @@
 ---
 
 ## 1. Project Title
-**Lap-Level Pit-Stop Prediction in Formula 1 Racing Using Supervised Machine Learning**
+**Predicting NYC Taxi Fares Using Supervised Machine Learning: A Comparative Analysis of Regression Models**
 
 ---
 
@@ -19,52 +19,54 @@
 
 | Property | Value |
 |---|---|
-| **Dataset Title** | F1 Strategy Dataset (Lap-Level Race Data) |
-| **Domain** | Sports Analytics / Data Science (Motorsports) |
-| **Source** | [Kaggle: F1 Strategy Dataset](https://www.kaggle.com/datasets/aadigupta1601/f1-strategy-dataset-pit-stop-prediction) |
-| **Rows & Columns** | 101,371 rows × 17 columns |
-| **Data Period** | 2019 – 2025 Formula 1 seasons |
-| **Task Type** | Binary Classification (Pit-Stop Prediction) |
-| **Target Variable** | `pit_stop` (0 = No pit stop, 1 = Pit stop) |
-| **Class Balance** | ~82.3% No Pit, ~17.7% Pit Stop (Imbalanced) |
+| **Dataset Title** | NYC Yellow Taxi Trip Record Data (2025) |
+| **Domain** | Urban Transportation / Smart Cities |
+| **Source** | [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) |
+| **Rows & Columns** | ~3.4 Million rows (sampled to 100,000) × 19 columns |
+| **Data Period** | January 2025 |
+| **Task Type** | Regression (Fare Prediction) |
+| **Target Variable** | `fare_amount` (Continuous) |
+| **Target Variable Range**| $2.50 – $300.00 (Cleaned) |
 
 ---
 
 ## 3. Problem Statement
-The timing of Formula 1 pit stops is one of the most critical tactical moves in motorsports. A well-timed pit stop can win a race, while a poor decision can result in a significant loss of positions. Pit stop timing is influenced by complex, multi-dimensional factors including tyre degradation, safety car interventions, weather changes, and fuel loads. Currently, many of these decisions are made manually by race engineers under high-pressure environments. This project proposes a supervised learning approach to predict the likelihood of a pit stop occurring in any given lap. By analyzing historical race data from the 2019–2025 seasons, we aim to build a predictive model that assists in optimizing race strategy through data-driven insights.
+Accurate fare estimation is essential for both passengers and ride-hailing services to ensure transparency and operational efficiency. In New York City, taxi fares are determined by a complex combination of distance, time, location-based surcharges, and traffic conditions. While traditional meters use fixed rates, supervised machine learning can provide more dynamic and accurate predictions by learning from millions of historical trips. 
+
+In this project, we analyze the January 2025 NYC Yellow Taxi dataset to predict the `fare_amount`. We evaluate five different regression models: Linear Regression, Decision Tree, k-Nearest Neighbors (k-NN), Random Forest, and Gradient Boosting. The goal is to identify the most robust model for real-time fare estimation.
 
 ---
 
 ## 4. Research Questions
-*   **RQ1.** How effectively can baseline supervised learning models (Logistic Regression, Decision Tree, k-NN) predict pit stops on the F1 Strategy Dataset?
-*   **RQ2.** Which supervised learning model achieves the best predictive performance for pit-stop classification, and how do models compare across all metrics?
-*   **RQ3.** How do different data preprocessing strategies (raw data, imputation, scaling/encoding, full pipeline) affect model performance?
-*   **RQ4.** Which input features contribute most to pit-stop prediction, and what domain insights can be derived from the top-ranked features?
-*   **RQ5.** How does the relative ranking of candidate models change when evaluated across different metrics (Accuracy, Precision, Recall, F1-score, AUC)?
-*   **RQ6.** How robust is the best-performing model under 5-fold cross-validation and varying data conditions?
-*   **RQ7.** To what extent is the developed supervised learning solution practically useful and reliable for real-world F1 race-strategy decision-making?
+*   **RQ1.** How effectively can baseline regression models (Linear Regression, Decision Tree, k-NN) predict taxi fares on the NYC dataset?
+*   **RQ2.** Which supervised learning model achieves the best predictive performance for fare regression, and how do models compare across RMSE, MAE, and R²?
+*   **RQ3.** How do different data preprocessing strategies (raw data, imputation, scaling, and outlier removal) affect the accuracy of fare predictions?
+*   **RQ4.** Which input features (e.g., trip distance, pickup hour, location) contribute most to the fare amount, and what insights can be derived from them?
+*   **RQ5.** How does the relative ranking of candidate models change when evaluated across different metrics (RMSE vs. MAE vs. R²)?
+*   **RQ6.** How robust is the best-performing regression model under 5-fold cross-validation and varying data conditions (noise/missingness)?
+*   **RQ7.** To what extent is the developed supervised learning solution practically useful and reliable for a real-world ride-hailing deployment?
 
 ---
 
 ## 5. Proposed Methodology
 
 ### 5.1 Data Preprocessing
-*   **Cleaning**: Handling missing values through median/mode imputation.
-*   **Balancing**: Addressing class imbalance using stratified splitting and evaluating through Precision-Recall curves.
-*   **Feature Engineering**: Encoding categorical variables (e.g., `tyre_compound`) and scaling numerical features (e.g., `tyre_life`, `fuel_load`).
-*   **Splitting**: 80% training / 20% testing set split.
+*   **Datetime Engineering**: Extracting `pickup_hour`, `day_of_week`, and `trip_duration_minutes`.
+*   **Filtering**: Removing outliers (fares < $2.50, distances > 100 miles, durations > 3 hours).
+*   **Feature Selection**: Dynamic selection of surcharges (`congestion_surcharge`, `airport_fee`) and location IDs.
+*   **Scaling**: Standardizing numerical features for distance-based models.
 
 ### 5.2 Machine Learning Models
-*   **Logistic Regression**: Linear baseline with L2 regularization.
-*   **Decision Tree**: Interpretable non-linear baseline.
-*   **k-Nearest Neighbors (k-NN)**: Instance-based classification.
-*   **Random Forest**: Ensemble bagging method for high variance reduction.
-*   **XGBoost**: Advanced gradient boosting for state-of-the-art accuracy.
+*   **Linear Regression**: Baseline linear relationship model.
+*   **Decision Tree Regressor**: Non-linear baseline with depth optimization.
+*   **k-Nearest Neighbors (k-NN)**: Instance-based regression (k=10).
+*   **Random Forest Regressor**: Ensemble bagging for high-dimensional stability.
+*   **Gradient Boosting Regressor**: Boosting method for minimizing residual errors.
 
 ### 5.3 Evaluation Metrics
-*   **Primary**: F1-Score and AUC-ROC (due to class imbalance).
-*   **Secondary**: Accuracy, Precision, Recall.
-*   **Analysis**: Confusion Matrix and Gain-based Feature Importance.
+*   **Root Mean Squared Error (RMSE)**: Primary metric for penalizing large errors.
+*   **Mean Absolute Error (MAE)**: Metric for average prediction error in dollars.
+*   **R-squared (R²)**: Measure of the proportion of variance explained by the model.
 
 ---
 
@@ -72,18 +74,18 @@ The timing of Formula 1 pit stops is one of the most critical tactical moves in 
 
 | # | Figure / Table | Purpose |
 |---|---|---|
-| **Table I** | Baseline Model Performance | Comparison of LR, DT, and k-NN |
-| **Figure 1** | Baseline Performance Chart | Grouped bar chart of Accuracy, Precision, Recall, F1 |
+| **Table I** | Baseline Regression Performance | Comparison of LR, DT, and k-NN |
+| **Figure 1** | Baseline Metric Comparison | Grouped bar chart of RMSE and MAE |
 | **Table II** | Full Model Comparison | Results for all 5 candidate models |
-| **Figure 2** | Model Ranking Chart | Sorted bar chart by F1-score and AUC-ROC |
-| **Table III** | Preprocessing Impact | Ablation study (Raw vs. Pipeline) |
-| **Figure 3** | Preprocessing Gains | Line plot showing performance increase |
-| **Table IV** | Top-10 Feature Importances | Ranking of predictors (Gain-based) |
-| **Figure 4** | Feature Importance Plot | Bar plot of the top 10 influencers |
-| **Table V** | Metric Sensitivity Ranking | Comparison of model ranks across metrics |
-| **Figure 5** | Bump Chart | Visualization of model rank shifts |
-| **Table VI** | 5-Fold CV Robustness | Stability analysis of the best model |
-| **Figure 6** | CV Performance Boxplot | Variance visualization across folds |
-| **Table VII** | Final Decision Matrix | Criteria-based model selection |
-| **Figure 7** | Multi-criteria Radar Chart | Trade-off analysis (Performance vs. Speed vs. Interpretability) |
-| **Figure 8** | Confusion Matrix | Error analysis of the recommended model |
+| **Figure 2** | Model Ranking (R² and RMSE) | Sorted horizontal bar charts |
+| **Table III** | Preprocessing Ablation Study | Performance gains from raw to full pipeline |
+| **Figure 3** | Preprocessing Impact Plot | Visualizing error reduction across strategies |
+| **Table IV** | Feature Importance Ranking | Top-10 features (Random Forest) |
+| **Figure 4** | Feature Importance Bar Plot | Ranking of predictors by importance score |
+| **Table V** | Metric Sensitivity Table | Model ranks across RMSE, MAE, and R² |
+| **Figure 5** | Model Ranking Bump Chart | Visualizing rank stability |
+| **Table VI** | 5-Fold CV & Noise Analysis | Robustness testing of the best model |
+| **Figure 6** | Error Distribution Plot | Histogram of residuals for the recommended model |
+| **Table VII** | Final Decision Matrix | Multi-criteria selection (Accuracy vs. Latency) |
+| **Figure 7** | Multi-criteria Radar Chart | Visualizing model trade-offs |
+| **Figure 8** | Predicted vs. Actual Plot | Scatter plot showing model alignment |
