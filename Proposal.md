@@ -1,124 +1,89 @@
-# Supervised Learning Assignment — Project Proposal
+# Supervised Machine Learning Assignment
+# Submission 1 – Research Proposal
 
-**Project Title**: NYC Taxi Fare Prediction: A Supervised Regression Learning Approach
+**Programme**: MSc Data Science  
+**Student**: Karnati Mysanthosh  
+**Student ID**: 36733714  
+**University**: University of Europe for Applied Sciences  
+**Supervisor**: Prof. Raja Hashim Ali  
+**Date**: 4th May 2026
 
 ---
 
-## 1. Dataset Information
+## 1. Project Title
+**Lap-Level Pit-Stop Prediction in Formula 1 Racing Using Supervised Machine Learning**
 
-| Property | Details |
+---
+
+## 2. Dataset Information
+
+| Property | Value |
 |---|---|
-| **Dataset Name** | NYC Yellow Taxi Trip Record Data (2025 Updated) |
-| **Source Link** | https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page |
-| **Direct Download** | https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2025-01.parquet |
-| **Number of Rows** | > 3,000,000 (subset of ~500,000 used) |
-| **Number of Columns** | 19 (18 input features + 1 target) |
-| **Format** | Parquet / CSV |
-| **Updated** | 2025 ✅ |
+| **Dataset Title** | F1 Strategy Dataset (Lap-Level Race Data) |
+| **Domain** | Sports Analytics / Data Science (Motorsports) |
+| **Source** | [Kaggle: F1 Strategy Dataset](https://www.kaggle.com/datasets/aadigupta1601/f1-strategy-dataset-pit-stop-prediction) |
+| **Rows & Columns** | 101,371 rows × 17 columns |
+| **Data Period** | 2019 – 2025 Formula 1 seasons |
+| **Task Type** | Binary Classification (Pit-Stop Prediction) |
+| **Target Variable** | `pit_stop` (0 = No pit stop, 1 = Pit stop) |
+| **Class Balance** | ~82.3% No Pit, ~17.7% Pit Stop (Imbalanced) |
 
 ---
 
-## 2. Target Variable
-
-**`fare_amount`** — the base fare in USD charged for a taxi trip in New York City.
-
----
-
-## 3. Type of Task
-
-**Regression** — The goal is to predict a continuous numeric value (fare amount in dollars).
+## 3. Problem Statement
+The timing of Formula 1 pit stops is one of the most critical tactical moves in motorsports. A well-timed pit stop can win a race, while a poor decision can result in a significant loss of positions. Pit stop timing is influenced by complex, multi-dimensional factors including tyre degradation, safety car interventions, weather changes, and fuel loads. Currently, many of these decisions are made manually by race engineers under high-pressure environments. This project proposes a supervised learning approach to predict the likelihood of a pit stop occurring in any given lap. By analyzing historical race data from the 2019–2025 seasons, we aim to build a predictive model that assists in optimizing race strategy through data-driven insights.
 
 ---
 
-## 4. Problem Statement
-
-The NYC taxi industry processes millions of trips per month, yet fare pricing remains opaque to passengers. Accurate fare prediction enables passengers to budget their travel costs, allows drivers to optimize route planning, and helps regulators detect billing anomalies. This project applies supervised machine learning regression models to the NYC Taxi Trip Record Data (2025) to predict taxi fare amounts based on trip characteristics such as distance, duration, time of day, pickup/dropoff locations, and surcharge features. We systematically compare multiple models, evaluate the impact of preprocessing, identify the most influential features, and assess robustness under varying experimental conditions.
-
----
-
-## 5. Research Questions
-
-### RQ1 — Baseline Performance
-How effectively can baseline supervised learning models predict NYC taxi fares on the 2025 trip dataset?
-
-### RQ2 — Model Comparison
-Which supervised learning model achieves the best predictive performance for taxi fare prediction, and how do the models compare across regression metrics?
-
-### RQ3 — Effect of Preprocessing
-How do different data preprocessing strategies (raw data, imputation, scaling, full pipeline) affect model performance?
-
-### RQ4 — Feature Importance and Interpretability
-Which input features contribute most to fare prediction, and what domain insights can be drawn from the most influential variables?
-
-### RQ5 — Sensitivity to Evaluation Metrics
-How does the relative ranking of candidate models change when RMSE, MAE, and R² are considered separately?
-
-### RQ6 — Robustness and Generalization
-How robust is the best-performing model under different train-test splits, k-fold cross-validation, and data perturbation (noise and missing values)?
-
-### RQ7 — Practical Usefulness and Final Recommendation
-To what extent is the developed supervised learning solution practically useful, interpretable, and reliable for real-world taxi fare estimation?
+## 4. Research Questions
+*   **RQ1.** How effectively can baseline supervised learning models (Logistic Regression, Decision Tree, k-NN) predict pit stops on the F1 Strategy Dataset?
+*   **RQ2.** Which supervised learning model achieves the best predictive performance for pit-stop classification, and how do models compare across all metrics?
+*   **RQ3.** How do different data preprocessing strategies (raw data, imputation, scaling/encoding, full pipeline) affect model performance?
+*   **RQ4.** Which input features contribute most to pit-stop prediction, and what domain insights can be derived from the top-ranked features?
+*   **RQ5.** How does the relative ranking of candidate models change when evaluated across different metrics (Accuracy, Precision, Recall, F1-score, AUC)?
+*   **RQ6.** How robust is the best-performing model under 5-fold cross-validation and varying data conditions?
+*   **RQ7.** To what extent is the developed supervised learning solution practically useful and reliable for real-world F1 race-strategy decision-making?
 
 ---
 
-## 6. Proposed Methodology
+## 5. Proposed Methodology
 
-1. **Data Collection**: Load January 2025 Yellow Taxi Parquet data directly from the NYC TLC S3 endpoint.
-2. **Preprocessing Pipeline**:
-   - Remove invalid records (negative fares, zero distance, extreme outliers)
-   - Handle missing values via median imputation
-   - Extract datetime features: pickup hour, day of week, trip duration
-   - Standardize numerical features using StandardScaler
-   - Encode categorical features
-3. **Exploratory Data Analysis**: Fare distributions, correlation heatmaps, fare vs. distance scatter plots, hourly patterns.
-4. **Model Training**: 80/20 train-test split. Five regression models trained:
-   - Linear Regression
-   - Decision Tree Regressor
-   - k-Nearest Neighbours Regressor
-   - Random Forest Regressor
-   - Gradient Boosting Regressor
-5. **Evaluation**: RMSE, MAE, R² across all models.
-6. **Advanced Analysis**: Preprocessing ablation, feature importance, cross-validation, robustness under noise and missingness, final decision matrix.
+### 5.1 Data Preprocessing
+*   **Cleaning**: Handling missing values through median/mode imputation.
+*   **Balancing**: Addressing class imbalance using stratified splitting and evaluating through Precision-Recall curves.
+*   **Feature Engineering**: Encoding categorical variables (e.g., `tyre_compound`) and scaling numerical features (e.g., `tyre_life`, `fuel_load`).
+*   **Splitting**: 80% training / 20% testing set split.
 
----
+### 5.2 Machine Learning Models
+*   **Logistic Regression**: Linear baseline with L2 regularization.
+*   **Decision Tree**: Interpretable non-linear baseline.
+*   **k-Nearest Neighbors (k-NN)**: Instance-based classification.
+*   **Random Forest**: Ensemble bagging method for high variance reduction.
+*   **XGBoost**: Advanced gradient boosting for state-of-the-art accuracy.
 
-## 7. Machine Learning Models
-
-| Model | Type |
-|---|---|
-| Linear Regression | Baseline linear |
-| Decision Tree Regressor | Non-linear, interpretable |
-| k-NN Regressor | Instance-based |
-| Random Forest Regressor | Ensemble (bagging) |
-| Gradient Boosting Regressor | Ensemble (boosting) |
+### 5.3 Evaluation Metrics
+*   **Primary**: F1-Score and AUC-ROC (due to class imbalance).
+*   **Secondary**: Accuracy, Precision, Recall.
+*   **Analysis**: Confusion Matrix and Gain-based Feature Importance.
 
 ---
 
-## 8. Evaluation Metrics
+## 6. Expected Figures and Tables
 
-| Metric | Description |
-|---|---|
-| **RMSE** | Root Mean Squared Error — penalises large prediction errors |
-| **MAE** | Mean Absolute Error — average dollar error per prediction |
-| **R²** | Coefficient of Determination — proportion of variance explained |
-
----
-
-## 9. Expected Figures and Tables
-
-| # | Figure / Table | RQ |
+| # | Figure / Table | Purpose |
 |---|---|---|
-| Table I | Baseline model performance (RMSE, MAE, R²) | RQ1 |
-| Figure 1 | Grouped bar chart of baseline model metrics | RQ1 |
-| Table II | Comparative performance of all candidate models | RQ2 |
-| Figure 2 | Horizontal bar or radar chart of model rankings | RQ2 |
-| Table III | Impact of preprocessing strategies on best model | RQ3 |
-| Figure 3 | Ablation bar chart of preprocessing strategies | RQ3 |
-| Table IV | Top-10 feature importances with direction & interpretation | RQ4 |
-| Figure 4 | Feature importance bar plot (Random Forest / SHAP) | RQ4 |
-| Table V | Model rankings under RMSE, MAE, and R² | RQ5 |
-| Figure 5 | Slope / bump chart of metric-based rankings | RQ5 |
-| Table VI | Robustness under standard split, CV, noise, missingness | RQ6 |
-| Figure 6 | Boxplot or line chart of cross-validation performance | RQ6 |
-| Table VII | Final decision matrix (performance, interpretability, cost) | RQ7 |
-| Figure 7 | Radar chart of final model trade-off analysis | RQ7 |
+| **Table I** | Baseline Model Performance | Comparison of LR, DT, and k-NN |
+| **Figure 1** | Baseline Performance Chart | Grouped bar chart of Accuracy, Precision, Recall, F1 |
+| **Table II** | Full Model Comparison | Results for all 5 candidate models |
+| **Figure 2** | Model Ranking Chart | Sorted bar chart by F1-score and AUC-ROC |
+| **Table III** | Preprocessing Impact | Ablation study (Raw vs. Pipeline) |
+| **Figure 3** | Preprocessing Gains | Line plot showing performance increase |
+| **Table IV** | Top-10 Feature Importances | Ranking of predictors (Gain-based) |
+| **Figure 4** | Feature Importance Plot | Bar plot of the top 10 influencers |
+| **Table V** | Metric Sensitivity Ranking | Comparison of model ranks across metrics |
+| **Figure 5** | Bump Chart | Visualization of model rank shifts |
+| **Table VI** | 5-Fold CV Robustness | Stability analysis of the best model |
+| **Figure 6** | CV Performance Boxplot | Variance visualization across folds |
+| **Table VII** | Final Decision Matrix | Criteria-based model selection |
+| **Figure 7** | Multi-criteria Radar Chart | Trade-off analysis (Performance vs. Speed vs. Interpretability) |
+| **Figure 8** | Confusion Matrix | Error analysis of the recommended model |
