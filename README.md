@@ -1,4 +1,4 @@
-# F1 Pit-Stop Prediction — Supervised Learning Assignment
+# NYC Taxi Fare Prediction — Supervised Learning Assignment
 
 **Programme**: MSc Data Science  
 **Student**: Karnati Mysanthosh (36733714)  
@@ -6,30 +6,28 @@
 **Supervisor**: Prof. Raja Hashim Ali
 
 ## Project Overview
-This project applies supervised machine learning to predict lap-level pit stops in Formula 1 racing. Using data from the 2019-2025 seasons, we evaluate multiple classifiers to optimize race strategy decisions.
+This project leverages supervised machine learning to predict taxi fares in New York City using the January 2025 Yellow Taxi dataset. We perform a comprehensive comparative analysis of five regression models to identify the most accurate predictor of the `fare_amount`.
 
 ## Research Questions
-- **RQ1**: Baseline performance (Logistic Regression, Decision Tree, k-NN).
-- **RQ2**: Comprehensive model comparison (including Random Forest and XGBoost).
-- **RQ3**: Impact of preprocessing strategies on F1-score.
-- **RQ4**: Feature importance and domain interpretation (Tyre life, Safety Car, etc.).
-- **RQ5**: Model sensitivity to evaluation metrics (Accuracy, Precision, Recall, F1, AUC).
-- **RQ6**: Robustness through 5-fold cross-validation.
-- **RQ7**: Practical usefulness and final model recommendation.
+The project is structured around 7 core research questions:
+- **RQ1**: Baseline regression performance (LR, DT, k-NN).
+- **RQ2**: Model comparison across RMSE, MAE, and R².
+- **RQ3**: Impact of data preprocessing and outlier removal.
+- **RQ4**: Feature importance and domain insights.
+- **RQ5**: Model ranking sensitivity across different metrics.
+- **RQ6**: Robustness analysis through 5-fold cross-validation.
+- **RQ7**: Practical usefulness and final recommendation.
 
 ## Dataset
-The dataset is sourced from Kaggle: [F1 Strategy Dataset (Lap-Level Race Data)](https://www.kaggle.com/datasets/aadigupta1601/f1-strategy-dataset-pit-stop-prediction).
+The dataset is provided by the NYC Taxi & Limousine Commission (TLC): [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
 
-## How to Run
-1.  Install dependencies: `pip install -r requirements.txt`
-2.  Run the Jupyter Notebook: `f1_pitstop_prediction.ipynb`
-3.  The script will generate all result tables and figures in the `/outputs/` directory.
+## Implementation
+- **Notebook**: `nyc_taxi_fare_prediction.ipynb`
+- **Script**: `nyc_taxi_fare_prediction.py`
+- **Outputs**: All generated tables (Table I-VII) and figures (Figure 1-8) are saved in the `/outputs/` directory.
 
 ## Requirements
-- Python 3.8+
-- pandas
-- numpy
-- matplotlib
-- seaborn
-- scikit-learn
-- xgboost
+To install dependencies, run:
+```bash
+pip install -r requirements.txt
+```
